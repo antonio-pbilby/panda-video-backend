@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  app:
+    container_name: rank-api
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    ports:
+      - 10800:10800
+    volumes:
+      - ./:/home/app
+    networks:
+      default-services-network:
+        aliases:
+          - default-docker-service
+
+networks:
+  default-services-network:
+    external:
+      name: default_services_network
