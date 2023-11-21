@@ -4,8 +4,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "commit": "cz",
-    "build": "rm -rf dist && tsc --project tsconfig-build.json && tscpaths -p tsconfig.json -s ./src -o ./dist/src",
-    "start": "node ./dist/src/server.js",
+    "build": "rm -rf dist && tsc --project tsconfig-build.json && tscpaths -p tsconfig.json -s ./src -o ./dist/",
+    "start": "node ./dist/server.js",
     "start:dev": "ts-node-dev -r tsconfig-paths/register --respawn --ignore-watch node_modules --no-notify src/server.ts",
     "lint": "eslint \"src/**/*.ts\"",
     "lint:fix": "yarn lint --fix",

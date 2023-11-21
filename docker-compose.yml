@@ -2,20 +2,21 @@ version: '3'
 
 services:
   app:
-    container_name: rank-api
+    container_name: backend
     build:
       context: .
-      dockerfile: Dockerfile-dev
+      dockerfile: Dockerfile
     ports:
-      - 10800:10800
+      - 3030:3030
     volumes:
       - ./:/home/app
-    networks:
-      default-services-network:
-        aliases:
-          - default-docker-service
+    depends_on:
+      - mongo
 
-networks:
-  default-services-network:
-    external:
-      name: default_services_network
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - "27017:27017"
