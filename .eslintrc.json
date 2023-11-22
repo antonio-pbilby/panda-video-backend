@@ -58,6 +58,7 @@
     "no-redeclare": "off",
     "no-shadow": "off",
     "no-unused-vars": "off",
+    "consistent-return": "off",
     "no-use-before-define": "off",
     "no-useless-constructor": "off",
     "prettier/prettier": "error",
