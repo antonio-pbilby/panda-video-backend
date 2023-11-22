@@ -39,9 +39,9 @@ export class UsersService implements User.ServiceInterface {
       throw new AuthenticationError('Email or passsword incorrect.');
     }
 
-    const token = sign({}, config.appSecret, {
+    const token = sign({}, config.app.secret, {
       subject: user.email,
-      expiresIn: config.tokenExpiresIn,
+      expiresIn: config.app.tokenExpiresIn,
     });
 
     return {

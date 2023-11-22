@@ -1,8 +1,9 @@
 import 'reflect-metadata';
 import { json } from 'express';
 
+import { config } from '@/config';
+
 import { app } from './app';
-import { config } from './config';
 import { initializeContainer } from './infra/initialize-container';
 import { initializeMongoDB } from './infra/initialize-mongodb';
 import { initializeRoutes } from './infra/initialize-routes';
@@ -17,8 +18,8 @@ class Server {
     initializeRoutes();
     app.use(errorHandler);
 
-    app.listen(config.port, '0.0.0.0', () => {
-      console.log(`Server running on port ${config.port}`);
+    app.listen(config.app.port, '0.0.0.0', () => {
+      console.log(`Server running on port ${config.app.port}`);
     });
   }
 }

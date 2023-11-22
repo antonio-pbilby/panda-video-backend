@@ -1,11 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
 
-export class VideosController {
-  constructor() {}
+import { VideosService } from './videos.service';
 
-  list(req: Request, res: Response, next: NextFunction) {
+export class VideosController {
+  private readonly videosService = new VideosService();
+
+  async list(req: Request, res: Response, next: NextFunction) {
     try {
-      res.json('ok');
+      const result = await this.videosService.list(req.query);
+      return res.json(result);
     } catch (err) {
       next(err);
     }
