@@ -4,6 +4,8 @@ export const config = {
   pandaVideo: {
     apiUrl: process.env.PANDA_VIDEO_API_URL,
     apiKey: process.env.PANDA_VIDEO_API_KEY,
+    cdnUrl: process.env.PANDA_VIDEO_CDN_URL,
+    cdnReferer: process.env.PANDA_VIDEO_CDN_REFERER,
   },
   app: {
     port: Number(process.env.APP_PORT) || 3030,

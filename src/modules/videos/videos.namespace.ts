@@ -10,4 +10,10 @@ export namespace Videos {
       page: yup.number().integer(),
     }),
   });
+
+  export const getCdnResources = yup.object({
+    params: yup.object({
+      externalId: yup.string().required(),
+    }),
+  });
 }

@@ -1,4 +1,5 @@
 import { app } from '@/app';
+import { ensureAuthenticated } from '@/middlewares/ensure-authenticated.middleware';
 import { validateSchema } from '@/middlewares/validate-schema.middleware';
 import { User } from '@/modules/users/ users.namespace';
 import { UsersController } from '@/modules/users/users.controller';
@@ -23,7 +24,15 @@ export function initializeRoutes() {
 
   app.get(
     '/videos',
+    ensureAuthenticated,
     validateSchema(Videos.listParamsSchema),
     videosController.list.bind(videosController),
+  );
+
+  app.get(
+    '/:externalId/thumbnail',
+    ensureAuthenticated,
+    validateSchema(Videos.getCdnResources),
+    videosController.getThumbnail.bind(videosController),
   );
 }

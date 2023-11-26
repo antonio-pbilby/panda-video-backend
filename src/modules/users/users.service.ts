@@ -1,11 +1,10 @@
 import bcrypt from 'bcrypt';
 import { inject, injectable } from 'inversify';
-import { sign } from 'jsonwebtoken';
 
-import { config } from '@/config';
 import { IDENTIFIERS } from '@/container';
 import { AuthenticationError } from '@/errors/authentication.error';
 
+import { Token } from '../tokens/token.namespace';
 import { User } from './ users.namespace';
 
 @injectable()
@@ -13,6 +12,8 @@ export class UsersService implements User.ServiceInterface {
   constructor(
     @inject(IDENTIFIERS.USERS_REPOSITORY)
     private readonly usersRepository: User.RepositoryInterface,
+    @inject(IDENTIFIERS.TOKEN_PROVIDER)
+    private readonly tokenProvider: Token.ProviderInterface,
   ) {}
 
   async create(user: User.Create): Promise<User.Entity> {
@@ -39,9 +40,9 @@ export class UsersService implements User.ServiceInterface {
       throw new AuthenticationError('Email or passsword incorrect.');
     }
 
-    const token = sign({}, config.app.secret, {
-      subject: user.email,
-      expiresIn: config.app.tokenExpiresIn,
+    const token = this.tokenProvider.sign({
+      email: user.email,
+      name: user.name,
     });
 
     return {
