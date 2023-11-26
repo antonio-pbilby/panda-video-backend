@@ -1,3 +1,5 @@
+import * as yup from 'yup';
+
 export namespace User {
   export class Entity {
     id?: string;
@@ -30,4 +32,19 @@ export namespace User {
   export interface LoginResponse {
     token: string;
   }
+
+  export const signupSchema = yup.object({
+    body: yup.object({
+      name: yup.string().required(),
+      email: yup.string().email().required(),
+      password: yup.string().required(),
+    }),
+  });
+
+  export const loginSchema = yup.object({
+    body: yup.object({
+      email: yup.string().email().required(),
+      password: yup.string().required(),
+    }),
+  });
 }

@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import cors from 'cors';
 import { json } from 'express';
 
 import { config } from '@/config';
@@ -11,6 +12,7 @@ import { errorHandler } from './middlewares/error-handler.middleware';
 
 class Server {
   static async start() {
+    app.use(cors());
     await initializeMongoDB();
     initializeContainer();
     app.use(json());
