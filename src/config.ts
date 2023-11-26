@@ -12,5 +12,6 @@ export const config = {
     mongo: process.env.MONGO_CONNECTION_STRING!,
     secret: process.env.APP_SECRET!,
     tokenExpiresIn: process.env.EXPIRES_IN || '7d',
+    baseUrl: process.env.BASE_URL,
   },
 };
