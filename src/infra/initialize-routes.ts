@@ -31,7 +31,6 @@ export function initializeRoutes() {
 
   app.get(
     '/:externalId/thumbnail',
-    ensureAuthenticated,
     validateSchema(Videos.getCdnResources),
     videosController.getThumbnail.bind(videosController),
   );
