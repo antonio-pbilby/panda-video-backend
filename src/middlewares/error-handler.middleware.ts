@@ -8,13 +8,13 @@ export function errorHandler(
   res: Response,
   next: NextFunction,
 ): void {
+  console.log(error);
   if (error instanceof HttpError) {
     res.status(error.statusCode).json({ error });
 
     return next();
   }
 
-  console.log(error);
   res.status(500).json('Internal Server Error');
 
   return next();

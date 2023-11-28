@@ -3,6 +3,7 @@ import { inject, injectable } from 'inversify';
 
 import { IDENTIFIERS } from '@/container';
 import { AuthenticationError } from '@/errors/authentication.error';
+import { BadRequestError } from '@/errors/bad-request.error';
 
 import { Token } from '../tokens/token.namespace';
 import { User } from './ users.namespace';
@@ -18,6 +19,15 @@ export class UsersService implements User.ServiceInterface {
 
   async create(user: User.Create): Promise<User.Entity> {
     const encryptedPassword = await bcrypt.hash(user.password, 10);
+
+    const userAlreadyExists = await this.usersRepository.findByEmail(
+      user.email,
+    );
+
+    if (userAlreadyExists) {
+      throw new BadRequestError('User already exists');
+    }
+
     return this.usersRepository.create({
       ...user,
       password: encryptedPassword,

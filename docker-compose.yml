@@ -5,13 +5,11 @@ services:
     container_name: backend
     build:
       context: .
-      dockerfile: Dockerfile-dev
+      dockerfile: Dockerfile
     ports:
       - 3030:3030
     volumes:
-      - ./:/home/app
-    depends_on:
-      - mongo
+      - ./:/home/app    
 
   mongo:
     image: mongo

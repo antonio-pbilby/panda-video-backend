@@ -5,9 +5,19 @@ export namespace Videos {
     page?: number;
   }
 
+  export interface GetParams {
+    id: string;
+  }
+
   export const listParamsSchema = yup.object({
     query: yup.object({
       page: yup.number().integer(),
+    }),
+  });
+
+  export const getParamsSchema = yup.object({
+    params: yup.object({
+      id: yup.string().required(),
     }),
   });
 

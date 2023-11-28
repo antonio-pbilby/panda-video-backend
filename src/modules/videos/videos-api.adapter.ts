@@ -19,4 +19,10 @@ export class VideosApiAdapter {
 
     return response.data;
   }
+
+  async get(params: Videos.GetParams) {
+    const response = await this.client.get(`/videos/${params.id}`);
+
+    return response.data;
+  }
 }

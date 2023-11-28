@@ -30,8 +30,27 @@ export function initializeRoutes() {
   );
 
   app.get(
+    '/videos/:id',
+    ensureAuthenticated,
+    validateSchema(Videos.getParamsSchema),
+    videosController.get.bind(videosController),
+  );
+
+  app.get(
     '/:externalId/thumbnail',
     validateSchema(Videos.getCdnResources),
     videosController.getThumbnail.bind(videosController),
+  );
+
+  app.get(
+    '/:externalId/preview',
+    validateSchema(Videos.getCdnResources),
+    videosController.getPreview.bind(videosController),
+  );
+
+  app.get(
+    '/:externalId/video-hls',
+    validateSchema(Videos.getCdnResources),
+    videosController.getHls.bind(videosController),
   );
 }

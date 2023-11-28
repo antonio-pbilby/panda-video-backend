@@ -16,4 +16,16 @@ export class VideosCdnAdapter {
 
     return response.data;
   }
+
+  async preview(externalId: string) {
+    const response = await this.client.get(`${externalId}/preview.webp`);
+
+    return response.data;
+  }
+
+  async videoHls(externalId: string) {
+    const response = await this.client.get(`${externalId}/playlist.m3u8`);
+
+    return response.data;
+  }
 }
